@@ -1,0 +1,25 @@
+doctype html
+html
+head
+//- body(data-query='on("mousedown", handler)')
+body
+  //- input(type='text', data-query='val(field)')
+  //- div(style='background: yellow', data-query='text(field)'){{$this.field}}
+  //- ul(data-query='each(items)')
+  //-   li(data-query='') {{$parent.field}}
+
+  div My name is {{firstName}} {{lastName}} and I am {{age}} years old.
+  div My name is {{fullName}} and I am {{age}} years old.
+
+  form
+    label first name
+      input(type='text' data-query='val(firstName)')
+
+    label last name
+      input(type='text' data-query='val(lastName)')
+
+    label age
+      input(type='text' data-query='val(age)')
+
+  each script in scripts
+    script(src= script)
