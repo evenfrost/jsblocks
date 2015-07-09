@@ -3,30 +3,71 @@
 
 import blocks from 'jsblocks';
 
-class Human {
-  constructor (firstName = 'John', lastName = 'Doe', age = 30) {
-    this.firstName = blocks.observable(firstName);
-    this.lastName = blocks.observable(lastName);
-    this.age = blocks.observable(age);
-  }
+// class Human {
+//   constructor (firstName = 'John', lastName = 'Doe', age = 30) {
+//     this.firstName = blocks.observable(firstName).on('changing', this.onFirstNameChanging);
+//     this.lastName = blocks.observable(lastName);
+//     this.age = blocks.observable(age);
+//   }
 
-  get fullName () {
-    return this.firstName + ' ' + this.lastName;
-  }
-}
+//   get fullName () {
+//     return this.firstName() + ' ' + this.lastName();
+//   }
 
-let human = new Human();
+//   onFirstNameChanging (newValue, oldValue) {
+//     // if (newValue && newValue.length > 5) return false;
+//   }
 
-console.log(human.firstName());
+// }
 
-blocks.query(human);
+// let human = new Human();
 
-// blocks.query({
-//   field: blocks.observable(''),
-//   firstName: blocks.observable('John'),
-//   items: ['first', 'second', 'last'],
-//   className: 'green',
-//   handler: event => console.log(event.type)
+// human.fullName.on('changing', (newValue, oldValue) => console.log(newValue));
+
+// blocks.query(human);
+
+
+
+// const app = blocks.Application();
+
+// app.extend({
+//   hello: 'Hello world'
 // });
 
-document.body.style.opacity = 1;
+// let article = app.Model({
+//   content: app.Property({
+//     defaultValue: 'no content'
+//   })
+// });
+// let articles = app.Collection(article);
+// let profile = app.Model({
+//   username: app.Property({
+//     required: true,
+//     errorMessage: 'username is not valid'
+//   }),
+//   email: app.Property({
+//     email: true
+//   })
+// });
+
+// app.View('signup', {
+//   articles: articles([{
+//     content: 'first article'
+//   }, {
+//     content: 'second article'
+//   }]),
+
+//   profile: profile()
+// });
+
+blocks.query({
+  items: [1, 2, 3]
+});
+
+if (document.readyState === 'complete') {
+  document.body.style.opacity = 1;
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.style.opacity = 1;
+  });
+}

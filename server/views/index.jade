@@ -5,13 +5,13 @@ head
 body
   //- input(type='text', data-query='val(field)')
   //- div(style='background: yellow', data-query='text(field)'){{$this.field}}
-  //- ul(data-query='each(items)')
-  //-   li(data-query='') {{$parent.field}}
+  ul(data-query='each(items)')
+    li {{$index}} {{$this}} {{parentContext}}
 
-  div My name is {{firstName}} {{lastName}} and I am {{age}} years old.
-  div My name is {{fullName}} and I am {{age}} years old.
+  //- div My name is {{firstName}} {{lastName}} and I am {{age}} years old.
+  //- div My name is {{fullName}} and I am {{age}} years old.
 
-  form
+  //- form
     label first name
       input(type='text' data-query='val(firstName)')
 
@@ -20,6 +20,15 @@ body
 
     label age
       input(type='text' data-query='val(age)')
+
+  //- div {{hello}}
+  //- div(data-query='view(signup)')
+  //-   div(data-query='with(profile)')
+  //-     input(placeholder='username', data-query='val(username)')
+  //-     span(data-query='visible(!username.valid()).html(username.errorMessage)')
+  //-   h3 Articles
+  //-   ul(data-query='each(articles)')
+  //-     li {{content}}
 
   each script in scripts
     script(src= script)
