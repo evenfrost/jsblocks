@@ -28,41 +28,63 @@ import blocks from 'jsblocks';
 
 
 
-// const app = blocks.Application();
-
-// app.extend({
-//   hello: 'Hello world'
-// });
-
-// let article = app.Model({
-//   content: app.Property({
-//     defaultValue: 'no content'
-//   })
-// });
-// let articles = app.Collection(article);
-// let profile = app.Model({
-//   username: app.Property({
-//     required: true,
-//     errorMessage: 'username is not valid'
-//   }),
-//   email: app.Property({
-//     email: true
-//   })
-// });
-
-// app.View('signup', {
-//   articles: articles([{
-//     content: 'first article'
-//   }, {
-//     content: 'second article'
-//   }]),
-
-//   profile: profile()
-// });
-
-blocks.query({
-  items: [1, 2, 3]
+const app = blocks.Application({
+  history: 'pushState'
 });
+
+app.extend({
+  hello: 'Hello world'
+});
+
+let article = app.Model({
+  content: app.Property({
+    defaultValue: 'no content'
+  })
+});
+
+let articles = app.Collection(article);
+
+let profile = app.Model({
+  username: app.Property({
+    required: true,
+    errorMessage: 'username is not valid'
+  }),
+  email: app.Property({
+    email: true
+  })
+});
+
+app.View('home', {
+  options: {
+    route: '/'
+  }
+});
+
+app.View('contacts', {
+  options: {
+    route: 'contacts'
+  }
+});
+
+app.View('signup', {
+  articles: articles([{
+    content: 'first article'
+  }, {
+    content: 'second article'
+  }]),
+
+  profile: profile({
+    username: 'john'
+  }),
+
+  init: function () {
+    this.description = 'A signup view';
+  }
+});
+
+// blocks.query({
+//   items: [1, 2, 3]
+// });
 
 if (document.readyState === 'complete') {
   document.body.style.opacity = 1;

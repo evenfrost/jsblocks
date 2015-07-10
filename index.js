@@ -33,7 +33,8 @@ app.use(views(path.join(__dirname, 'server/views'), {
 }));
 
 // index route
-router.get('/', function* () {
+router.get(/(^\/$|^\/contacts$)/, function* () {
+// router.get('/contacts', function* () {
   let scripts = [];
   let styles = [];
 

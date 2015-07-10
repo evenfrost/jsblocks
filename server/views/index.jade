@@ -5,8 +5,6 @@ head
 body
   //- input(type='text', data-query='val(field)')
   //- div(style='background: yellow', data-query='text(field)'){{$this.field}}
-  ul(data-query='each(items)')
-    li {{$index}} {{$this}} {{parentContext}}
 
   //- div My name is {{firstName}} {{lastName}} and I am {{age}} years old.
   //- div My name is {{fullName}} and I am {{age}} years old.
@@ -21,14 +19,25 @@ body
     label age
       input(type='text' data-query='val(age)')
 
+  ul
+    li: a(href='#', data-query='navigateTo(home)') Home
+    li: a(href='#', data-query='navigateTo(contacts)') Contact
+
+  div(data-query='view(home)')
+    h1 home view
+
+  div(data-query='view(contacts)')
+    h1 contacts view
+
   //- div {{hello}}
   //- div(data-query='view(signup)')
-  //-   div(data-query='with(profile)')
-  //-     input(placeholder='username', data-query='val(username)')
-  //-     span(data-query='visible(!username.valid()).html(username.errorMessage)')
-  //-   h3 Articles
-  //-   ul(data-query='each(articles)')
-  //-     li {{content}}
+    h2 {{description}}
+    div(data-query='with(profile)')
+      input(placeholder='username', data-query='val(username)')
+      span(data-query='visible(!username.valid()).html(username.errorMessage)')
+    h3 Articles
+    ul(data-query='each(articles)')
+      li {{content}}
 
   each script in scripts
     script(src= script)
