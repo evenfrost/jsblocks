@@ -19,18 +19,35 @@ body
     label age
       input(type='text' data-query='val(age)')
 
-  ul
-    li: a(href='#', data-query='navigateTo(home)') Home
-    li: a(href='#', data-query='navigateTo(contacts)') Contact
+  //- ul
+  //-   li: a(href='#', data-query='navigateTo(Home)') Home
+  //-   li: a(href='#', data-query='navigateTo(Contacts)') Contact
 
-  div(data-query='view(home)')
-    h1 home view
+  //- div(data-query='view(Home)')
+  //-   h1 home view
 
-  div(data-query='view(contacts)')
-    h1 contacts view
+  //- div(data-query='view(Contacts)')
+  //-   h1 contacts view
+
+  //- div(data-query='view(Profiles)')
+  //-   | Username: 
+  //-   input(data-query='val(username)')
+  //-   button(data-query='click(addNewUser)') Add new user
+  //-   //- button(data-query='click(sort)') Sort
+  //-   ul(data-query='each(users)')
+  //-     li {{username}}
+  //-   h3 sorted
+  //-   ul(data-query='each(users.view)')
+  //-     li {{username}}
+  //-   h3 Total count {{users.count}}
+
+  ul(data-query='each(features.view)')
+    li {{name}}, <i>{{type}}</i>
+  input(type='text', placeholder='Filter', data-query='val(inputValue)')
+  button(data-query='click(setFilter)') Set filter
 
   //- div {{hello}}
-  //- div(data-query='view(signup)')
+  //- div(data-query='view(Signup)')
     h2 {{description}}
     div(data-query='with(profile)')
       input(placeholder='username', data-query='val(username)')

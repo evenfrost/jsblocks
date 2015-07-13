@@ -28,59 +28,114 @@ import blocks from 'jsblocks';
 
 
 
-const app = blocks.Application({
+const App = blocks.Application({
   history: 'pushState'
 });
 
-app.extend({
-  hello: 'Hello world'
-});
+let features = blocks.observable([{
+  name: 'Feature 1',
+  type: 'feature'
+}, {
+  name: 'Feature 2',
+  type: 'feature'
+}]);
 
-let article = app.Model({
-  content: app.Property({
-    defaultValue: 'no content'
-  })
-});
-
-let articles = app.Collection(article);
-
-let profile = app.Model({
-  username: app.Property({
-    required: true,
-    errorMessage: 'username is not valid'
+App.extend({
+  inputValue: blocks.observable(''),
+  filterValue: blocks.observable(''),
+  features: features.extend('filter', value => {
+    let filter = App.filterValue().toLowerCase();
+    return value.name.indexOf(filter) > -1 || value.type.indexOf(filter) > -1;
   }),
-  email: app.Property({
-    email: true
-  })
-});
-
-app.View('home', {
-  options: {
-    route: '/'
+  setFilter: () => {
+    App.filterValue(App.inputValue());
   }
 });
 
-app.View('contacts', {
-  options: {
-    route: 'contacts'
-  }
-});
+// let Article = App.Model({
+//   content: App.Property({
+//     defaultValue: 'no content'
+//   })
+// });
 
-app.View('signup', {
-  articles: articles([{
-    content: 'first article'
-  }, {
-    content: 'second article'
-  }]),
+// let Articles = App.Collection(Article);
 
-  profile: profile({
-    username: 'john'
-  }),
+// let Profile = App.Model({
+//   username: App.Property({
+//     required: true,
+//     errorMessage: 'username is not valid'
+//   }),
+//   email: App.Property({
+//     email: true
+//   })
+// });
 
-  init: function () {
-    this.description = 'A signup view';
-  }
-});
+// views
+// App.View('Home', {
+//   options: {
+//     route: '/'
+//   }
+// });
+
+// App.View('Contacts', {
+//   options: {
+//     route: 'contacts'
+//   }
+// });
+
+// App.View('Signup', {
+//   Articles: new Articles([{
+//     content: 'first Article'
+//   }, {
+//     content: 'second Article'
+//   }]),
+
+//   profile: new Profile({
+//     username: 'john'
+//   }),
+
+//   init: function () {
+//     this.description = 'A signup view';
+//   }
+// });
+
+// let Users = App.Collection({
+//   count: blocks.observable(function () {
+//     return this().length;
+//   })
+// });
+
+// App.View('Profiles', {
+//   users: new Users([{ username: 'admin' }]).extend('sort', 'username'),
+//   // users: new Users([{ username: 'admin' }]).extend('skip', 2),
+//   username: blocks.observable(),
+//   addNewUser: () => {
+//     let view = App.Profiles;
+
+//     view.users.push({
+//       username: view.username()
+//     });
+
+//     view.username('');
+//   }
+// });
+
+// let User = App.Model({
+//   username: App.Property({
+//     required: 'Username is required!'
+//   }),
+
+//   email: App.Property({
+//     email: 'Please provide a valid email!'
+//   })
+// });
+
+// let user = new User({
+//   username: '',
+//   email: 'email@email'
+// });
+
+// user.validate();
 
 // blocks.query({
 //   items: [1, 2, 3]
